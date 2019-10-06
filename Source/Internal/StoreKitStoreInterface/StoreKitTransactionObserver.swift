@@ -63,7 +63,7 @@ extension StoreKitTransactionObserver : SKPaymentTransactionObserver {
         self.delegate?.storeInterfaceDidUpdatePurchases(self.storeInterface)
     }
     
-    #if os(iOS)
+    #if !targetEnvironment(macCatalyst)
     internal func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
         let response = self.delegate?.storeInterface(self.storeInterface, responseForStoreIntentToCommitPurchaseFrom: .pendingStorePayment(product, payment)) ?? .default
         
